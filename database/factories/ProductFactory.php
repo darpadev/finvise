@@ -16,12 +16,15 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $word = $this->faker->word(3, true);
+        $word = str_replace(' ', '+', $word);
+        
         return [
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(10),
             'price' => $this->faker->randomFloat(2, 1, 100),
             'stock' => $this->faker->numberBetween(1, 100),
-            'url' => $this->faker->imageUrl(),
+            'url' => "https://placehold.co/600x400?text={$word}",
         ];
     }
 }
