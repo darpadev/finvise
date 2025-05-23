@@ -23,7 +23,7 @@
             </div>
 
             <div class="flex justify-center">
-                <div class="w-1/4 bg-orange-200 rounded-lg shadow-md p-3 text-center text-gray-800 font-bold cursor-pointer hover:bg-orange-300 transition-colors duration-300">
+                <div id="load-more" class="w-1/4 bg-orange-200 rounded-lg shadow-md p-3 text-center text-gray-800 font-bold cursor-pointer hover:bg-orange-300 transition-colors duration-300">
                     Load More
                 </div>
             </div>
@@ -31,8 +31,27 @@
     </div>
 @endsection
 
+@section('header_scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+@endsection
+
 @section('scripts')
     <script>
-        
+        $(document).ready(function() {
+            let page = 1;
+            $('#load-more').click(function() {
+                page++;
+                $.ajax({
+                    url: '/api/products?page=' + page,
+                    type: 'GET',
+                    success: function(data) {
+                        $('.grid').append(data);
+                    },
+                    error: function() {
+                        alert('Error loading more products.');
+                    }
+                });
+            });
+        });
     </script>
 @endsection
