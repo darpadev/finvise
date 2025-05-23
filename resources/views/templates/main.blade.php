@@ -16,7 +16,7 @@
 <body class="bg-orange-50">
     <div class="m-5">
         <div class="bg-white mb-10 p-5 rounded-xl flex flex-col lg:flex-row justify-between items-center shadow-2xl">
-            <img src="{{ asset('images/finvise-site-logo.png') }}" alt="finvise logo" class="w-50">
+            <img src="{{ asset('images/finvise-site-logo.png') }}" alt="finvise logo" class="w-40">
             <p class="text-2xl font-bold text-gray-800 cursor-default pointer-events-none hidden lg:block">
                 Full Stack Developer | Technical Test | Milzam Hutomo
             </p>
