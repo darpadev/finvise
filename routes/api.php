@@ -25,6 +25,10 @@ Route::name('api.')->group(function () {
             ->latest()
             ->get();
 
+        if (empty($products)) {
+            return FALSE;
+        }
+
         $fetched_product = '';
 
         foreach ($products as $product) {

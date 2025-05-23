@@ -45,6 +45,11 @@
                     url: '/api/products?page=' + page,
                     type: 'GET',
                     success: function(data) {
+                        if (data == false) {
+                            $('#load-more').hide();
+                            return;
+                        }
+
                         $('.grid').append(data);
                     },
                     error: function() {
