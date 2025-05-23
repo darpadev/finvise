@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::name('api.')->group(function () {
+    Route::get('/products', function (Request $request) {
+        $page = $request->get('page', 1);
+
+        $products = Product::hasStock()
+            ->skip(($page - 1) * 25)
+            ->take(25)
+            ->latest()
+            ->get();
+
+        $fetched_product = '';
+
+        foreach ($products as $product) {
+            $fetched_product .= view('components.product-card', compact('product'))->render();
+        }
+
+        return $fetched_product;
+    })->name('products.index');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
 });

@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     $products = Product::hasStock()
         ->take(25)
+        ->latest()
         ->get();
     
     return view('home', compact('products'));
