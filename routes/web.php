@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    $products = Product::hasStock()
+        ->take(25)
+        ->get();
+    
+    return view('home', compact('products'));
+})->name('home');
