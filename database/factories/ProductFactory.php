@@ -16,7 +16,7 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $word = $this->faker->word(3, true);
+        $word = $this->faker->words(2, true);
         $word = str_replace(' ', '+', $word);
         
         return [
