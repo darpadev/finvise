@@ -30,9 +30,10 @@ Route::middleware('auth')->group(function () {
             return view('dashboard');
         })->name('dashboard');
 
-        Route::get('/product/{product}', function (Product $product) {
-            return view('product', compact('product'));
-        })->name('product.show');
+        Route::controller(ProductController::class)->group(function () {
+            Route::get('/', 'index')->name('home');
+            Route::get('/product/{product}', 'show')->name('product.show');
+        });
     });
 });
 
